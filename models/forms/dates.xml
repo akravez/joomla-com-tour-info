@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<form>
+    <fieldset>
+        <field
+			name="tour_id"
+			type="sql"
+			sql_select="id, CONCAT(title, ' (', days, ' дн.)') AS title"
+			sql_from="#__tour_price"
+			sql_group="title"
+			sql_order="id ASC"
+			key_field="id"
+			value_field="title"
+			label="Выберите тур для добавления новой даты"
+			header=""
+			showon="newold:1"
+			class="required span-16"
+		/>
+ 		<field
+			name="newold"
+			type="radio"
+			default="1"
+			label="Будете заводить новую дату начала тура?"
+			class="btn-group btn-group-yesno"
+			>
+			<option value="1">ДА</option>
+			<option value="0">НЕТ</option>
+		</field>
+       <field
+			name="dates"
+			type="sql"
+			query="SELECT d.id AS id, d.date_start AS dstart, CONCAT('С ', DATE_FORMAT(d.date_start, '%d-%m-%y'), ' по ', DATE_FORMAT(d.date_end, '%d-%m-%y'), ' -> из тура: ', p.title) AS dates, p.title AS title FROM #__tour_dates AS d LEFT JOIN #__tour_price AS p ON d.tour_id = p.id ORDER BY dstart ASC"
+			key_field="id"
+			value_field="dates"
+			header=""
+			label="Выберите даты тура для удаления"
+			multiple="multiple"
+			showon="newold:0"
+			class="span-16"
+		/>
+        <field
+			name="date_start"
+			type="calendar"
+			label="Введите (ГГГГ-ММ-ДД) или выберите ещё одну дату начала тура:"
+			showon="newold:1"
+			class=""
+		/>
+     </fieldset>
+</form>

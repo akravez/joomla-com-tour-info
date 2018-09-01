@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<form>
+    <fieldset name="myfieldset">
+		<field
+			name="newold"
+			type="radio"
+			default="1"
+			label="Будете заводить новый тур, изменять существующий или удалять его?"
+			class="btn-group btn-group-yesno"
+			>
+			<option value="1">Завести новый тур</option>
+			<option value="0">Изменить существующий</option>
+			<option value="2">Удалить существующий</option>
+		</field>
+		<field 
+			name="new_tour_name" 
+			type="text"
+			label="Введите название нового тура"
+			value=""
+			showon="newold:1"
+			class="required new-tour-name"
+		/>
+		<field 
+			name="new_tour_days" 
+			type="number"
+			label="Продолжительность в днях"
+			min="1"
+			value="1"
+			showon="newold:1"
+			class="required new-tour-days"
+		/>
+		<field 
+			name="old_tour_days" 
+			type="number"
+			label="Продолжительность в днях"
+			readonly="true"
+			showon="newold:0,2"
+			class="span-5"
+		/>
+        <field
+			name="article_id"
+			type="sql"
+			query="SELECT id, title FROM #__content WHERE catid=1 AND id != ALL (SELECT article_id FROM #__tour_price) ORDER BY title ASC"
+			key_field="id"
+			value_field="title"
+			label="Выберите статью об этом туре"
+			showon="newold:1"
+			class="span-24"
+		/>
+
+        <field
+			name="tour_id"
+			type="sql"
+			query="SELECT CONCAT_WS('/', t.id, t.base_price, t.add_for_1, t.disc_for_3, t.dinners, t.suppers, t.days) AS id,
+				concat(t.title, ' - статья: `', c.title, '`' ) AS title, t.article_id
+				FROM #__tour_price AS t, #__content AS c WHERE t.article_id = c.id ORDER BY title"
+			key_field="id"
+			value_field="title"
+			label="Выберите существующий тур"
+			header=""
+			showon="newold:0,2"
+			class="span-18 tour-id"
+		/>
+		<field
+			name="current_prices_note"
+			type="note"
+			label="Текущие цены (за полный тур)"
+			showon="newold:0,2"
+		/>
+		<field
+			name="new_prices_note"
+			type="note"
+			label="Введите новые цены (за полный тур)"
+			showon="newold:0,1"
+		/>
+        <field
+			name="base_price"
+			type="number"
+			label="Текущая базовая цена (цена за 1 чел. при 2х-местном размещении)"
+			readonly="true"
+			showon="newold:0,2"
+			class="span-4"
+		/>
+        <field
+			name="add_for_1"
+			type="number"
+			label="Надбавка за 1-местное размещение"
+			readonly="true"
+			showon="newold:0,2"
+			class="span-4"
+		/>
+        <field
+			name="disc_for_3"
+			type="number"
+			label="Скидка за 3 чел. в номере"
+			readonly="true"
+			showon="newold:0,2"
+			class="span-4"
+		/>
+        <field
+			name="dinners"
+			type="number"
+			label="Стоимость обедов (за весь тур)"
+			readonly="true"
+			showon="newold:0,2"
+			class="span-4"
+		/>
+		<field 
+			name="suppers" 
+			type="number"
+			label="Стоимость ужинов (за весь тур)"
+			readonly="true"
+			showon="newold:0,2"
+			class="span-4"
+		/>
+		<field 
+			name="new_base_price"
+			type="number"
+			min="1000"
+			label="Базовая цена (цена за 1 чел. при 2х-местном размещении)"
+			showon="newold:0,1"
+			class="span-4 required validate-numeric"
+		/>
+        <field
+			name="new_add_for_1"
+			type="number"
+			label="Надбавка за 1-местное размещение"
+			showon="newold:0,1"
+			class="span-4 validate-numeric"
+		/>
+        <field
+			name="new_disc_for_3"
+			type="number"
+			label="Скидка за 3 чел. в номере"
+			showon="newold:0,1"
+			class="span-4 validate-numeric"
+		/>
+        <field
+			name="new_dinners"
+			type="number"
+			label="Стоимость обедов (за весь тур)"
+			showon="newold:0,1"
+			class="span-4 validate-numeric"
+		/>
+		<field 
+			name="new_suppers" 
+			type="number"
+			label="Стоимость ужинов (за весь тур)"
+			showon="newold:0,1"
+			class="span-4 validate-numeric"
+		/>
+		<field 
+			name="changed_name" 
+			type="text"
+			label="Введите новое название выбранного тура"
+			showon="newold:0"
+			class=""
+		/>
+		<field 
+			name="space" 
+			type="spacer"
+			hr="true"
+			showon="newold:0"
+			class=""
+		/>
+		
+    </fieldset>
+</form>

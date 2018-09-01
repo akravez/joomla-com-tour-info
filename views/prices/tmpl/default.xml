@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<metadata>
+    <layout title="COM_TOURS_INFO_PRICES"/>
+    <fields name="request">
+        <fieldset
+                name="request"
+                addfieldpath="/administrator/components/com_tours_info/models/fields">
+
+        </fieldset>
+    </fields>
+</metadata>

@@ -1,0 +1,15 @@
+/* 2017-03-13 start */
+input.new-tour-name {
+	font-style: italic;
+}
+input.new-tour-days {
+	width: 35px;
+	font-weight: bold;
+}
+select.tour-id {
+	font-style: italic;
+	font-weight: bold;
+	color: green;
+	background-color: grey;
+}
+/* 2017-03-13 end */
