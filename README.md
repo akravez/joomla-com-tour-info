@@ -1,0 +1,3 @@
+# joomla-com-tour-info
+Joomla 3 component
+Attention! This us NOT a full component, don't try to clone or download it, it's useless...
